@@ -13,8 +13,9 @@
             <base-card-title>{{ food.name }}</base-card-title>
             <base-card-subtitle>{{ food.price }}</base-card-subtitle>
             <base-card-actions>
-              <base-btn icon>
-                <v-icon>mdi-plus-circle</v-icon>
+              <base-btn block @click.prevent="addOder(food)">
+                <v-icon left>mdi-plus</v-icon>
+                Adicionar
               </base-btn>
             </base-card-actions>
           </base-card>
@@ -24,14 +25,24 @@
   </base-container>
 </template>
 <script>
-import Vue from 'vue';
-
-export default Vue.extend({
+export default {
   props: {
     foods: {
       type: Array,
       required: true,
     },
   },
-});
+  methods: {
+    addOder(order) {
+      const value = {
+        order,
+        status: 'pendente',
+      };
+
+      this.$store.dispatch('SET_LOADING');
+      this.$store.dispatch('ADD_ORDER', value);
+      this.$store.dispatch('UNSET_LOADING');
+    },
+  },
+};
 </script>

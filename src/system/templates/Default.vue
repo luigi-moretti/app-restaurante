@@ -6,7 +6,7 @@
     </layout-main>
   </layout-app>
 </template>
-<script lang="ts">
+<script>
 import Vue from 'vue';
 import { LayoutApp, LayoutAppBar, LayoutMain } from '@/system/components/layout';
 

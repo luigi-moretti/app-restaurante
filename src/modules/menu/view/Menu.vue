@@ -6,20 +6,30 @@
           <h1 class='text-h4'>Cardápio</h1>
         </base-col>
       </base-row>
-      <list-import :foods="foods"></list-import>
+      <list-import :foods='foods'></list-import>
     </base-container>
+    <footer-import />
   </template-default>
 </template>
 <script>
 import Vue from 'vue';
 
 const ListImport = () => ({
-  component: import(/* webpackChunkName: "menu-list" */ '@/modules/menu/components/List.vue'),
+  component: import(
+    /* webpackChunkName: 'menu-list' */ '@/modules/menu/components/List.vue'
+  ),
+});
+
+const FooterImport = () => ({
+  component: import(
+    /* webpackChunkName: 'menu-footer' */ '@/system/components/Footer.vue'
+  ),
 });
 
 export default Vue.extend({
   components: {
     ListImport,
+    FooterImport,
   },
   data: () => ({
     foods: [

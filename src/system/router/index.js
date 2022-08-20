@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import {
   RouterHome,
   RouterMenu,
+  RouterOrder,
 } from '../routes';
 
 Vue.use(VueRouter);
@@ -10,6 +11,7 @@ Vue.use(VueRouter);
 const routes = [
   RouterHome,
   RouterMenu,
+  RouterOrder,
 ];
 
 const router = new VueRouter({

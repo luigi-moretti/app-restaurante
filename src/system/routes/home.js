@@ -5,7 +5,7 @@ export const RoutesHome = {
 const route = {
   path: '/',
   name: RoutesHome.HOME,
-  component: () => import(/* webpackChunkName: "home" */ '@/modules/home/view/Home.vue'),
+  component: () => import(/* webpackChunkName: "route-home" */ '@/modules/home/view/Home.vue'),
 };
 
 export default route;

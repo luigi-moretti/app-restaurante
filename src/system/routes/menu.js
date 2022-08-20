@@ -5,7 +5,7 @@ export const RoutesMenu = {
 const route = {
   path: '/menu',
   name: RoutesMenu.MENU,
-  component: () => import(/* webpackChunkName: "menu" */ '@/modules/menu/view/Menu.vue'),
+  component: () => import(/* webpackChunkName: "route-menu" */ '@/modules/menu/view/Menu.vue'),
 };
 
 export default route;

@@ -9,12 +9,22 @@
     <v-app-bar-title>
       Pedidos
     </v-app-bar-title>
+    <v-progress-linear
+      :active="getLoading"
+      :indeterminate="getLoading"
+      absolute
+      bottom
+      color="indigo accent-4"
+    ></v-progress-linear>
   </v-app-bar>
 </template>
-<script lang="ts">
-import Vue from 'vue';
+<script>
+import { mapGetters } from 'vuex';
 
-export default Vue.extend({
+export default {
   name: 'LayoutAppBar',
-});
+  computed: {
+    ...mapGetters(['getLoading']),
+  },
+};
 </script>
