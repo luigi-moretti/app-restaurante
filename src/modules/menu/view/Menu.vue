@@ -13,11 +13,13 @@
 </template>
 <script>
 import Vue from 'vue';
+import Skeleton from '@/system/components/base/Skeleton.vue';
 
 const ListImport = () => ({
   component: import(
     /* webpackChunkName: 'menu-list' */ '@/modules/menu/components/List.vue'
   ),
+  loading: Skeleton,
 });
 
 const FooterImport = () => ({

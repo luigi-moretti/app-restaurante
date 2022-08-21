@@ -3,6 +3,7 @@
     <v-btn
       icon
       small
+      @click.prevent="goBack"
     >
       <v-icon>mdi-arrow-left-thin</v-icon>
     </v-btn>
@@ -23,6 +24,11 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'LayoutAppBar',
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
+  },
   computed: {
     ...mapGetters(['getLoading']),
   },

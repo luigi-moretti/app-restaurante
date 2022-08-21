@@ -34,10 +34,9 @@ export default {
   },
   methods: {
     addOder(order) {
-      const value = {
-        order,
-        status: 'pendente',
-      };
+      const value = order;
+      value.status = 'pendente';
+      value.quantity = 1;
 
       this.$store.dispatch('SET_LOADING');
       this.$store.dispatch('ADD_ORDER', value);
