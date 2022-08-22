@@ -33,7 +33,7 @@
           </base-btn>
         </base-col>
       </base-row>
-      <list-import :products='getProducts'></list-import>
+      <list-import :products='getProductsComputed'></list-import>
     </base-container>
     <form-filter-import @handleFilter="handleFilter" :showFilter="showFilter" :filters="filters"/>
     <footer-import />
@@ -73,7 +73,10 @@ export default {
     showFilter: false,
     filters: {
       food: '',
-      category: {},
+      category: {
+        category: 0,
+        label: '',
+      },
     },
   }),
   methods: {
@@ -84,7 +87,7 @@ export default {
       this.filters.food = '';
     },
     clearCategoryFilter() {
-      this.filters.category = {};
+      this.filters.category = 0;
     },
   },
   mounted() {
@@ -96,6 +99,31 @@ export default {
       });
   },
   computed: {
+    getProductsComputed() {
+      if (!!this.filters.category.category || !!this.filters.food) {
+        const productsFiltered = this.getProducts.filter((product) => {
+          if (!!this.filters.category.category && !!this.filters.food) {
+            return (
+              product.name.toLocaleLowerCase().indexOf(this.filters.food) >= 0
+              && product.category === this.filters.category.category
+            );
+          }
+          if (this.filters.category.category) {
+            return product.category === this.filters.category.category;
+          }
+          if (this.filters.food) {
+            return product.name.toLocaleLowerCase().indexOf(this.filters.food) >= 0;
+          }
+          return false;
+        });
+
+        return productsFiltered.sort((a, b) => a.category - b.category);
+      }
+
+      const products = this.getProducts;
+
+      return products.sort((a, b) => a.category - b.category);
+    },
     ...mapGetters(['getProducts']),
   },
 };

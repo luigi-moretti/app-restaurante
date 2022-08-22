@@ -8,6 +8,7 @@ const actions = {
           id
           name
           price
+          category
           image {
             url
           }
