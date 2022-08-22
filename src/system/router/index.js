@@ -4,6 +4,7 @@ import {
   RouterHome,
   RouterMenu,
   RouterOrder,
+  RouterProduct,
 } from '../routes';
 
 Vue.use(VueRouter);
@@ -12,6 +13,7 @@ const routes = [
   RouterHome,
   RouterMenu,
   RouterOrder,
+  RouterProduct,
 ];
 
 const router = new VueRouter({
