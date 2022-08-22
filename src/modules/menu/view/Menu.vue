@@ -6,14 +6,43 @@
           <h1 class='text-h4'>Cardápio</h1>
         </base-col>
       </base-row>
-      <list-import :foods='foods'></list-import>
+      <base-row dense>
+        <base-col>
+          <h3 class='text-h6'>Filtros:</h3>
+          <v-chip
+            v-if="filters.food"
+            class="ma-2"
+            close
+            @click:close="clearFoodFilter"
+          >
+            Alimento: {{filters.food}}
+          </v-chip>
+          <v-chip
+            v-if="filters.category.label"
+            class="ma-2"
+            close
+            @click:close="clearCategoryFilter"
+          >
+            Categoria: {{filters.category.label}}
+          </v-chip>
+          <base-btn
+            block
+            @click="showFilter=true">
+            <v-icon left>mdi-magnify</v-icon>
+              Filtrar
+          </base-btn>
+        </base-col>
+      </base-row>
+      <list-import :products='getProducts'></list-import>
     </base-container>
+    <form-filter-import @handleFilter="handleFilter" :showFilter="showFilter" :filters="filters"/>
     <footer-import />
   </template-default>
 </template>
 <script>
-import Vue from 'vue';
 import Skeleton from '@/system/components/base/Skeleton.vue';
+import Repository from '@/modules/menu/repository/RepositoryFactory';
+import { mapGetters } from 'vuex';
 
 const ListImport = () => ({
   component: import(
@@ -28,126 +57,46 @@ const FooterImport = () => ({
   ),
 });
 
-export default Vue.extend({
+const FormFilterImport = () => ({
+  component: import(
+    /* webpackChunkName: 'menu-form-filter' */ '@/modules/menu/components/FormFilter.vue'
+  ),
+});
+
+export default {
   components: {
     ListImport,
     FooterImport,
+    FormFilterImport,
   },
   data: () => ({
-    foods: [
-      {
-        id: 1,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 2,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 3,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 4,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 11,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 12,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 13,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 14,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 21,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 22,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 23,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 24,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 31,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 32,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 33,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-      {
-        id: 34,
-        name: 'Café',
-        price: '15.6',
-        description: 'Café do dia a dia',
-        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-      },
-    ],
+    showFilter: false,
+    filters: {
+      food: '',
+      category: {},
+    },
   }),
-});
+  methods: {
+    handleFilter() {
+      this.showFilter = false;
+    },
+    clearFoodFilter() {
+      this.filters.food = '';
+    },
+    clearCategoryFilter() {
+      this.filters.category = {};
+    },
+  },
+  mounted() {
+    const menuRepository = Repository.get('menu');
+
+    menuRepository.getProducts()
+      .then((response) => {
+        this.$store.dispatch('SET_PRODUCTS', response.allProducts || []);
+      });
+  },
+  computed: {
+    ...mapGetters(['getProducts']),
+  },
+};
 </script>

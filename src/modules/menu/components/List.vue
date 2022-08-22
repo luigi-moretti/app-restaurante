@@ -1,19 +1,27 @@
 <template>
   <base-container fluid class="px-0">
     <base-row dense>
-      <base-col v-for="food in foods" cols="6" :key="food.id" v-ripple>
+      <base-col
+        v-for="product in products"
+        cols="6"
+        sm="6"
+        md="3"
+        :key="product.id"
+        v-ripple>
         <v-lazy
+          class="fill-height"
           :options="{
             threshold: 0.5,
           }"
           transition="fade-transition"
         >
-          <base-card>
-            <v-img :src="food.src"> </v-img>
-            <base-card-title>{{ food.name }}</base-card-title>
-            <base-card-subtitle>{{ food.price }}</base-card-subtitle>
+          <base-card class="fill-height d-flex flex-column">
+            <v-img :src="product.image.url"> </v-img>
+            <base-card-title>{{ product.name }}</base-card-title>
+            <base-card-subtitle>{{ product.price }}</base-card-subtitle>
+            <v-spacer></v-spacer>
             <base-card-actions>
-              <base-btn block @click.prevent="addOder(food)">
+              <base-btn block @click.prevent="addOder(product)">
                 <v-icon left>mdi-plus</v-icon>
                 Adicionar
               </base-btn>
@@ -27,7 +35,7 @@
 <script>
 export default {
   props: {
-    foods: {
+    products: {
       type: Array,
       required: true,
     },
@@ -43,5 +51,6 @@ export default {
       this.$store.dispatch('UNSET_LOADING');
     },
   },
+
 };
 </script>

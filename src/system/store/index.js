@@ -6,10 +6,12 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     loading: false,
+    products: [],
     order: [],
   },
   getters: {
     getLoading: (state) => state.loading,
+    getProducts: (state) => state.products,
     getOrder: (state) => state.order,
     getOrderPending: (state) => state.order.filter((item) => item.status === 'pendente'),
     getOrderSent: (state) => state.order.filter((item) => item.status === 'solicitado'),
@@ -19,29 +21,14 @@ export default new Vuex.Store({
   mutations: {
     SET_LOADING: (state) => { state.loading = true; },
     UNSET_LOADING: (state) => { state.loading = false; },
-    ADD_ORDER: (state, value) => {
-      const alreadyContains = state.order.find((item) => item.id === value.id);
-      console.log('fui chamado', { alreadyContains });
-      if (alreadyContains) {
-        console.log('salve');
-        state.order.forEach((item) => {
-          if (item.id === value.id) {
-            console.log('ooooiii', item.quantity);
-            // eslint-disable-next-line no-param-reassign
-            item.quantity += value.quantity;
-            console.log('OOOI', item.quantity);
-          }
-        });
-      } else {
-        console.log('faaala');
-        state.order.push(value);
-      }
-    },
+    SET_PRODUCTS: (state, value) => { state.products = value; },
+    ADD_ORDER: (state, value) => { state.order.push(value); },
   },
   actions: {
     SET_LOADING: ({ commit }) => commit('SET_LOADING'),
     UNSET_LOADING: ({ commit }) => commit('UNSET_LOADING'),
     ADD_ORDER: ({ commit }, value) => commit('ADD_ORDER', value),
+    SET_PRODUCTS: ({ commit }, value) => commit('SET_PRODUCTS', value),
   },
   modules: {
   },
