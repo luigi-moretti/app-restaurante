@@ -5,14 +5,13 @@
     </layout-main>
   </layout-app>
 </template>
-<script lang="ts">
-import Vue from 'vue';
+<script>
 import { LayoutApp, LayoutMain } from '@/system/components/layout';
 
-export default Vue.extend({
+export default {
   name: 'TemplateFullScreen',
   components: {
     LayoutApp, LayoutMain,
   },
-});
+};
 </script>

@@ -1,10 +1,9 @@
 <template>
   <router-view />
 </template>
-<script lang="ts">
-import Vue from 'vue';
+<script>
 
-export default Vue.extend({
+export default {
   name: 'LayoutRouterView',
-});
+};
 </script>

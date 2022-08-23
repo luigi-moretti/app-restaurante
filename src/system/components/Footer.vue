@@ -8,7 +8,7 @@
             block>
           <v-badge
             v-if="!!getOderQuantity"
-            color="green"
+            color="accent"
             :content="getOderQuantity"
             class="mr-5"
           >
@@ -30,7 +30,7 @@
             block>
           <v-badge
             v-if="!!getOderQuantity"
-            color="green"
+            color="accent"
             :content="getOderQuantity"
             class="mr-5"
           >
@@ -59,6 +59,7 @@ export default {
       this.$router.push({ name: Routes.ORDER });
     },
     goToPayment() {
+      this.$store.dispatch('RESET_ORDER');
       this.$router.push({ name: Routes.MENU });
     },
   },

@@ -10,13 +10,13 @@
     <base-card-actions>
       <base-row align='center' align-content='start' class='pa-0 ma-0'>
         <base-col cols='2' class='pa-0 ma-0'>
-          <base-btn block @click.prevent='handleRemove' icon>
+          <base-btn color="error" block @click.prevent='handleRemove' icon>
             <v-icon left>mdi-minus-circle</v-icon>
           </base-btn>
         </base-col>
         <base-col cols='2' class='pa-0 ma-0'> {{productComputed.quantity || 0}}</base-col>
         <base-col cols='2' class='pa-0 ma-0'>
-          <base-btn block @click.prevent='handleAdd' icon>
+          <base-btn color="primary" block @click.prevent='handleAdd' icon>
             <v-icon left>mdi-plus-circle</v-icon>
           </base-btn>
         </base-col>

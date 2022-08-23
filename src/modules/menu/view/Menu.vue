@@ -27,6 +27,7 @@
             Categoria: {{filters.category.label}}
           </v-chip>
           <base-btn
+            color="secondary"
             block
             @click="showFilter=true">
             <v-icon left>mdi-magnify</v-icon>

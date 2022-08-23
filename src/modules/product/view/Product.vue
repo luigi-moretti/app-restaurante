@@ -32,7 +32,11 @@
       </base-row>
       <base-row align="center" align-content="start" class="pa-0 ma-0">
         <base-col cols="2" class="pa-0 ma-0">
-          <base-btn @click="handleRemove" :disabled="productComputed.quantity < 1" icon>
+          <base-btn
+            color="accent"
+            @click="handleRemove"
+            :disabled="productComputed.quantity < 1"
+            icon>
             <v-icon>
               mdi-minus-circle
             </v-icon>
@@ -42,7 +46,7 @@
           {{productComputed.quantity || 0}}
         </base-col>
         <base-col cols="2" class="pa-0 ma-0">
-          <base-btn @click="handleAdd" icon>
+          <base-btn color="primary" @click="handleAdd" icon>
             <v-icon>
               mdi-plus-circle
             </v-icon>

@@ -56,6 +56,7 @@ export default new Vuex.Store({
 
       state.order = newOrder;
     },
+    RESET_ORDER: (state) => { state.order = []; },
   },
   actions: {
     SET_LOADING: ({ commit }) => commit('SET_LOADING'),
@@ -69,6 +70,7 @@ export default new Vuex.Store({
     SET_PRODUCTS: ({ commit }, value) => commit('SET_PRODUCTS', value),
     INCREASE_ORDER: ({ commit }, value) => commit('INCREASE_ORDER', value),
     DECREASE_ORDER: ({ commit }, value) => commit('DECREASE_ORDER', value),
+    RESET_ORDER: ({ commit }) => commit('RESET_ORDER'),
   },
   modules: {
   },

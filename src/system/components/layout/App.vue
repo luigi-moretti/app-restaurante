@@ -3,10 +3,9 @@
     <slot></slot>
   </v-app>
 </template>
-<script lang="ts">
-import Vue from 'vue';
+<script>
 
-export default Vue.extend({
+export default {
   name: 'LayoutApp',
-});
+};
 </script>

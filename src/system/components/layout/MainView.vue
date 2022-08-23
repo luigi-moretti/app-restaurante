@@ -3,10 +3,9 @@
     <slot></slot>
   </v-main>
 </template>
-<script lang="ts">
-import Vue from 'vue';
+<script>
 
-export default Vue.extend({
+export default {
   name: 'LayoutMain',
-});
+};
 </script>

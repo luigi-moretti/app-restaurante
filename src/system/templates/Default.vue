@@ -8,7 +8,6 @@
   </layout-app>
 </template>
 <script>
-import Vue from 'vue';
 import { LayoutApp, LayoutAppBar, LayoutMain } from '@/system/components/layout';
 
 const FooterImport = () => ({
@@ -17,10 +16,10 @@ const FooterImport = () => ({
   ),
 });
 
-export default Vue.extend({
+export default {
   name: 'TemplateDefault',
   components: {
     LayoutApp, LayoutAppBar, LayoutMain, FooterImport,
   },
-});
+};
 </script>

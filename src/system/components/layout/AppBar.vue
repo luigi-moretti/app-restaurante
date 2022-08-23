@@ -8,7 +8,7 @@
       <v-icon>mdi-arrow-left-thin</v-icon>
     </v-btn>
     <v-app-bar-title>
-      Pedidos
+      App Restaurante
     </v-app-bar-title>
     <v-progress-linear
       :active="getLoading"
