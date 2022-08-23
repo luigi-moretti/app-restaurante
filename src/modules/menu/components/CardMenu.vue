@@ -5,7 +5,7 @@
   >
     <v-img :src='product.image.url' @click='goToProduct(product)'> </v-img>
     <base-card-title>{{ product.name }}</base-card-title>
-    <base-card-subtitle>{{ product.price }}</base-card-subtitle>
+    <base-card-subtitle>{{ renderMoney(product.price) }}</base-card-subtitle>
     <v-spacer></v-spacer>
     <base-card-actions>
       <base-row align='center' align-content='start' class='pa-0 ma-0'>
@@ -27,6 +27,7 @@
 <script>
 import { Routes } from '@/system/routes';
 import { mapGetters } from 'vuex';
+import renderMoney from '@/system/helpers/renderMoney';
 
 export default {
   props: {
@@ -57,6 +58,7 @@ export default {
         this.$store.dispatch('REMOVE_ORDER', this.product.id);
       }
     },
+    renderMoney,
   },
   computed: {
     productComputed() {

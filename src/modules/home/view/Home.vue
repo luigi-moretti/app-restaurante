@@ -10,8 +10,10 @@
         <base-row>
           <base-col>
             <base-text-field
+              v-model="userName"
               outlined
               label="Como você se chama?"
+              required
               >
             </base-text-field>
           </base-col>
@@ -19,9 +21,11 @@
         <base-row>
           <base-col>
             <base-select
-            :items="mesas"
+            v-model="table"
+            :items="tables"
             outlined
             label="Selecione uma mesa"
+            required
         ></base-select>
           </base-col>
         </base-row>
@@ -40,10 +44,14 @@ import { RoutesMenu } from '@/system/routes/menu';
 
 export default Vue.extend({
   data: () => ({
-    mesas: [1, 2, 3, 55, 32, 22, 13],
+    userName: '',
+    table: 0,
+    tables: [1, 2, 3, 55, 32, 22, 13],
   }),
   methods: {
     handleSubmit() {
+      this.$store.dispatch('SET_TABLE', this.table);
+      this.$store.dispatch('SET_USER', this.userName);
       this.$router.push({ name: RoutesMenu.MENU });
     },
   },

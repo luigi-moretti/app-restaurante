@@ -4,16 +4,23 @@
     <layout-main>
       <slot></slot>
     </layout-main>
+    <footer-import />
   </layout-app>
 </template>
 <script>
 import Vue from 'vue';
 import { LayoutApp, LayoutAppBar, LayoutMain } from '@/system/components/layout';
 
+const FooterImport = () => ({
+  component: import(
+    /* webpackChunkName: 'menu-footer' */ '@/system/components/Footer.vue'
+  ),
+});
+
 export default Vue.extend({
   name: 'TemplateDefault',
   components: {
-    LayoutApp, LayoutAppBar, LayoutMain,
+    LayoutApp, LayoutAppBar, LayoutMain, FooterImport,
   },
 });
 </script>

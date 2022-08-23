@@ -1,29 +1,21 @@
 <template>
-  <base-container fluid class="px-0">
+  <base-container fluid class='px-0'>
     <base-row dense>
-      <base-col cols="12">
+      <base-col
+        v-for="order in getOrder"
+        cols="12"
+        sm="6"
+        md="3"
+        :key="order.id"
+        >
         <v-lazy
+          class="fill-height"
           :options="{
             threshold: 0.5,
           }"
           transition="fade-transition"
         >
-          <v-expansion-panels v-model="panel" multiple>
-            <v-expansion-panel class="mb-3">
-              <v-expansion-panel-header>Itens para preparo: {{qtdPend}}</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <list-items-peding-import v-if="!!qtdPend" />
-                <no-data-import v-else />
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-            <v-expansion-panel class="mb-3">
-              <v-expansion-panel-header>Itens solicitados: {{qtdSent}}</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <list-items-sent-import v-if="!!qtdSent" />
-                <no-data-import v-else />
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
+          <list-item :order="order"/>
         </v-lazy>
       </base-col>
     </base-row>
@@ -31,44 +23,14 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import SkeletonList from '@/modules/order/components/SkeletonList.vue';
-
-const ListItemsPedingImport = () => ({
-  component: import(/* webpackChunkName: "order-list-peding" */ '@/modules/order/components/ListItemsPeding.vue'),
-  loading: SkeletonList,
-});
-
-const ListItemsSentImport = () => ({
-  component: import(/* webpackChunkName: "order-list-sent" */ '@/modules/order/components/ListItemsSent.vue'),
-  loading: SkeletonList,
-});
-
-const NoDataImport = () => ({
-  component: import(/* webpackChunkName: "order-no-data" */ '@/system/components/NoData.vue'),
-  loading: SkeletonList,
-});
+import ListItem from '@/modules/order/components/ListItem.vue';
 
 export default {
   components: {
-    ListItemsPedingImport,
-    ListItemsSentImport,
-    NoDataImport,
+    ListItem,
   },
-  data: () => ({
-    panel: [0],
-  }),
   computed: {
-    qtdPend() {
-      return this.getOrderPending.length;
-    },
-    qtdSent() {
-      return this.getOrderSent.length;
-    },
-    ...mapGetters([
-      'getOrderPending',
-      'getOrderSent',
-      'getOrderPaid',
-    ]),
+    ...mapGetters(['getOrder']),
   },
 };
 </script>

@@ -22,7 +22,7 @@
       <base-row>
         <base-col>
           <h2 class='text-h6'>Valor</h2>
-          <p>{{product.price}}</p>
+          <p>{{ renderMoney(product.price) }}</p>
         </base-col>
       </base-row>
       <base-row>
@@ -56,6 +56,7 @@
 // import Skeleton from '@/system/components/base/Skeleton.vue';
 import Repository from '@/modules/product/repository/RepositoryFactory';
 import { mapGetters } from 'vuex';
+import renderMoney from '@/system/helpers/renderMoney';
 
 export default {
   data: () => ({
@@ -78,6 +79,7 @@ export default {
         this.$store.dispatch('REMOVE_ORDER', this.$route.params.idProduct);
       }
     },
+    renderMoney,
   },
   mounted() {
     this.$store.dispatch('SET_LOADING');

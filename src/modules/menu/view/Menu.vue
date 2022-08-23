@@ -3,7 +3,8 @@
     <base-container>
       <base-row>
         <base-col>
-          <h1 class='text-h4'>Cardápio</h1>
+          <h1 class='text-h5'>Olá {{getUser}}, seja bem-vindo!</h1>
+          <h2 class='text-h4'>Cardápio</h2>
         </base-col>
       </base-row>
       <base-row dense>
@@ -36,7 +37,6 @@
       <list-import :products='getProductsComputed'></list-import>
     </base-container>
     <form-filter-import @handleFilter="handleFilter" :showFilter="showFilter" :filters="filters"/>
-    <footer-import />
   </template-default>
 </template>
 <script>
@@ -51,12 +51,6 @@ const ListImport = () => ({
   loading: Skeleton,
 });
 
-const FooterImport = () => ({
-  component: import(
-    /* webpackChunkName: 'menu-footer' */ '@/system/components/Footer.vue'
-  ),
-});
-
 const FormFilterImport = () => ({
   component: import(
     /* webpackChunkName: 'menu-form-filter' */ '@/modules/menu/components/FormFilter.vue'
@@ -66,7 +60,6 @@ const FormFilterImport = () => ({
 export default {
   components: {
     ListImport,
-    FooterImport,
     FormFilterImport,
   },
   data: () => ({
@@ -124,7 +117,7 @@ export default {
 
       return products.sort((a, b) => a.category - b.category);
     },
-    ...mapGetters(['getProducts']),
+    ...mapGetters(['getProducts', 'getUser']),
   },
 };
 </script>
